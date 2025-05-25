@@ -1,0 +1,57 @@
+@startuml VirtualDetective
+
+package "model" {
+  class Player {
+    - String name
+    - int score
+    + Player(String name)
+    + String getName()
+    + int getScore()
+    + void increaseScore(int points)
+  }
+  
+  class Game {
+    - Player player
+    + Game(Player player)
+    + Player getPlayer()
+  }
+  
+  class Clue {
+    - String question
+    - String answer
+    + Clue(String question, String answer)
+    + String getQuestion()
+    + String getAnswer()
+  }
+}
+
+package "dao" {
+  class ClueDAO {
+    - String fileName
+    + ClueDAO(String fileName)
+    + List<Clue> loadClues()
+  }
+}
+
+package "utils" {
+  class InputUtils {
+    - Scanner scanner
+    + String getStringInput(String prompt)
+    + int getIntInput(String prompt)
+    + void closeScanner()
+  }
+}
+
+class Main {
+  + {static} void main(String[] args)
+  - {static} void createDefaultCluesFile()
+}
+
+Main --> Game
+Main --> Player
+Main --> ClueDAO
+Main --> InputUtils
+Game --> Player
+ClueDAO --> Clue
+
+@enduml

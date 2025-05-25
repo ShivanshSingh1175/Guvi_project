@@ -1,0 +1,15 @@
+erDiagram
+    PLAYER {
+        string name PK
+        int score
+    }
+    GAME {
+        string player_name FK
+    }
+    CLUE {
+        string question PK
+        string answer
+    }
+    
+    GAME ||--|| PLAYER : "has"
+    GAME }o--o{ CLUE : "presents"
